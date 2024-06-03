@@ -1,0 +1,12 @@
+{
+  "repoURL": "https://charts.bitnami.com/bitnami",
+  "targetRevision": "17.3.2",
+  "chart": "nginx",
+  "valuesPath": "base/nginx/values.yaml",
+  "valuesOverlayPath": "workloads/nginx/dev/values-overlay.yaml",
+  "namespace": "nginx1",
+  "name": "nginx1",
+  "syncwave": "one"
+}
+
+
