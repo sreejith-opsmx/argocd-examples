@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: appofappset
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+       path: appofappset
+       repoURL: https://github.com/gopaljayanthi/jpmcargocd.git
+       targetRevision: HEAD

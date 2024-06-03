@@ -1,0 +1,95 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: in-cluster-workload-jpmcargocd
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/gopaljayanthi/jpmcargocd.git
+        revision: master
+        files:
+        - path: "workloads/**/dev/config.json"
+  strategy:
+    type: RollingSync
+    rollingSync: 
+      steps: 
+        - matchExpressions:
+            - key: syncWave
+              operator: In
+              values: 
+                - zero
+          maxUpdate: 100%
+        - matchExpressions:
+            - key: syncWave
+              operator: In
+              values: 
+                - one
+          maxUpdate: 100%
+        - matchExpressions:
+            - key: syncWave
+              operator: In
+              values: 
+                - two
+          maxUpdate: 100%
+        - matchExpressions:
+            - key: syncWave
+              operator: In
+              values: 
+                - three
+          maxUpdate: 100%
+  template:
+    metadata:
+      name: 'in-cluster-{{name}}'
+      labels: 
+        syncWave: {{syncwave}}
+      #annotations:
+      #  argocd.argoproj.io/sync-wave: {{ "'{{syncwave}}'" }}
+    spec:
+      project: default
+      sources:
+        - repoURL: '{{repoURL}}'
+          targetRevision: '{{targetRevision}}'
+
+          path: '{{path}}'
+
+          chart: '{{chart}}'
+          helm:
+            passCredentials: true
+            parameters:
+            - name: awsDeploymentRegion
+              value: us-west-1
+            - name: awsDeploymentEnvironment
+              value: dev
+            - name: vpcEndpointCidr
+              value: somecidrs
+            valueFiles:
+              - {{ "$values/{{valuesPath}}" }}
+              - {{ "$valueOverlay/{{valuesOverlayPath}}" }}
+        - repoURL: {{ $repo.repoUrl }}
+          targetRevision: {{ $repo.branch | default "main" }}
+          ref: values
+        - repoURL: {{ $repo.repoUrl }}
+          targetRevision: {{ $repo.branch | default "main" }}
+          ref: valueOverlay
+      destination:
+        name: in-cluster
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          #selfHeal: true
+          allowEmpty: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+        retry:
+          limit: 1
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 1m
+      ignoreDifferences:
+        - jsonPointers:
+            - /spec/storageClassName
+          kind: PersistentVolumeClaim
