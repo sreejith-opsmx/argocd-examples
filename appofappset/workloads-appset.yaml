@@ -55,14 +55,6 @@ spec:
 
           chart: '{{chart}}'
           helm:
-            passCredentials: true
-            parameters:
-            - name: awsDeploymentRegion
-              value: us-west-1
-            - name: awsDeploymentEnvironment
-              value: dev
-            - name: vpcEndpointCidr
-              value: somecidrs
             valueFiles:
               - '{{ "$values/{{valuesPath}}" }}'
               - '{{ "$valueOverlay/{{valuesOverlayPath}}" }}'
