@@ -64,8 +64,8 @@ spec:
             - name: vpcEndpointCidr
               value: somecidrs
             valueFiles:
-              - {{ "$values/{{valuesPath}}" }}
-              - {{ "$valueOverlay/{{valuesOverlayPath}}" }}
+              - "$values/{{valuesPath}}"
+              - "$valueOverlay/{{valuesOverlayPath}}"
         - repoURL: https://github.com/gopaljayanthi/jpmcargocd.git
           targetRevision: master
           ref: values
