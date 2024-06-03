@@ -42,7 +42,7 @@ spec:
     metadata:
       name: 'in-cluster-{{name}}'
       labels: 
-        syncWave: {{syncwave}}
+        syncWave: '{{syncwave}}'
       #annotations:
       #  argocd.argoproj.io/sync-wave: {{ "'{{syncwave}}'" }}
     spec:
@@ -64,13 +64,13 @@ spec:
             - name: vpcEndpointCidr
               value: somecidrs
             valueFiles:
-              - {{ "$values/{{valuesPath}}" }}
-              - {{ "$valueOverlay/{{valuesOverlayPath}}" }}
-        - repoURL: {{ $repo.repoUrl }}
-          targetRevision: {{ $repo.branch | default "main" }}
+              - '{{ "$values/{{valuesPath}}" }}'
+              - '{{ "$valueOverlay/{{valuesOverlayPath}}" }}'
+        - repoURL: '{{repoUrl}}'
+          targetRevision: master
           ref: values
-        - repoURL: {{ $repo.repoUrl }}
-          targetRevision: {{ $repo.branch | default "main" }}
+        - repoURL: '{{repoUrl}}'
+          targetRevision: master
           ref: valueOverlay
       destination:
         name: in-cluster
