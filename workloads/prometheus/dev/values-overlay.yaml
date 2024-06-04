@@ -17,6 +17,9 @@ server:
         - source_labels:
               - __meta_kubernetes_service_name
           target_label: service
+        - source_labels:
+              - __meta_kubernetes_namespace
+          target_label: namespace
       - job_name: "argocd-applicationset-controller"
         metrics_path: /metrics
         kubernetes_sd_configs:
@@ -34,6 +37,9 @@ server:
         - source_labels:
               - __meta_kubernetes_service_name
           target_label: service
+        - source_labels:
+              - __meta_kubernetes_namespace
+          target_label: namespace
       - job_name: "argocd-repo-server"
         metrics_path: /metrics
         kubernetes_sd_configs:
@@ -51,7 +57,10 @@ server:
         - source_labels:
               - __meta_kubernetes_service_name
           target_label: service
-      - job_name: "argocd-metrics"
+        - source_labels:
+              - __meta_kubernetes_namespace
+          target_label: namespace
+      - job_name: "argocd-server-metrics"
         metrics_path: /metrics
         kubernetes_sd_configs:
           - role: service
