@@ -1,0 +1,12 @@
+{
+  "repoURL": "https://charts.bitnami.com/bitnami",
+  "targetRevision": "11.3.0",
+  "chart": "grafana",
+  "valuesPath": "base/grafana/values.yaml",
+  "valuesOverlayPath": "workloads/grafana/dev/values-overlay.yaml",
+  "namespace": "prom",
+  "name": "grafana",
+  "syncwave": "two"
+}
+
+

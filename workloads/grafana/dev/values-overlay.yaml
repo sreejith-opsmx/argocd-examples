@@ -1,0 +1,4 @@
+grafana:
+  ## @param grafana.replicaCount Number of Grafana nodes
+  ##
+  replicaCount: 1
