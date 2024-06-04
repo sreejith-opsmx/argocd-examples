@@ -1,6 +1,5 @@
 server:
-  configuration:
-    extraScrapeConfigs:
+  extraScrapeConfigs:
       - job_name: "argocd-server"
         metrics_path: /metrics
         kubernetes_sd_configs:
