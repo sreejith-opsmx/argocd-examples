@@ -51,3 +51,20 @@ server:
         - source_labels:
               - __meta_kubernetes_service_name
           target_label: service
+      - job_name: "argocd-metrics"
+        metrics_path: /metrics
+        kubernetes_sd_configs:
+          - role: service
+            namespaces:
+              names:
+              - argocd
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_service_name]
+          action: keep
+          regex: argocd-metrics
+        - source_labels: [__meta_kubernetes_service_port_name]
+          action: keep
+          regex: metrics
+        - source_labels:
+              - __meta_kubernetes_service_name
+          target_label: service
