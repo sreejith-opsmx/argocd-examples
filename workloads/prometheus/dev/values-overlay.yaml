@@ -1,1 +1,54 @@
-replicaCount: 2
+server:
+  configuration:
+    extraScrapeConfigs:
+      - job_name: "argocd-server"
+        metrics_path: /metrics
+        kubernetes_sd_configs:
+          - role: service
+            namespaces:
+              names:
+              - argocd
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_service_name]
+          action: keep
+          regex: argocd-server
+        - source_labels: [__meta_kubernetes_service_port_name]
+          action: keep
+          regex: metrics
+        - source_labels:
+              - __meta_kubernetes_service_name
+          target_label: service
+      - job_name: "argocd-applicationset-controller"
+        metrics_path: /metrics
+        kubernetes_sd_configs:
+          - role: service
+            namespaces:
+              names:
+              - argocd
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_service_name]
+          action: keep
+          regex: argocd-applicationset-controller
+        - source_labels: [__meta_kubernetes_service_port_name]
+          action: keep
+          regex: metrics
+        - source_labels:
+              - __meta_kubernetes_service_name
+          target_label: service
+      - job_name: "argocd-repo-server"
+        metrics_path: /metrics
+        kubernetes_sd_configs:
+          - role: service
+            namespaces:
+              names:
+              - argocd
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_service_name]
+          action: keep
+          regex: argocd-repo-server
+        - source_labels: [__meta_kubernetes_service_port_name]
+          action: keep
+          regex: metrics
+        - source_labels:
+              - __meta_kubernetes_service_name
+          target_label: service
