@@ -73,7 +73,7 @@ spec:
           ref: valueOverlay
       destination:
         name: in-cluster
-        namespace: 'new-{{namespace}}'
+        namespace: '{{namespace}}-new'
       syncPolicy:
         automated:
           prune: true
