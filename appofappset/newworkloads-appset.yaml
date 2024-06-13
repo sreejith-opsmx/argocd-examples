@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: in-cluster-workload-jpmcargocd
+  name: newworkload-jpmcargocd
 spec:
   generators:
     - git:
         repoURL: https://github.com/gopaljayanthi/jpmcargocd.git
         revision: master
         files:
-        - path: "workloads/**/dev/config.json"
+        - path: "newworkloads/**/dev/config.json"
   strategy:
     type: RollingSync
     rollingSync: 
@@ -39,13 +39,13 @@ spec:
           maxUpdate: 100%
   template:
     metadata:
-      name: 'in-cluster-{{name}}'
+      name: 'new-{{name}}'
       labels: 
         syncWave: '{{syncwave}}'
       #annotations:
       #  argocd.argoproj.io/sync-wave: {{ "'{{syncwave}}'" }}
     spec:
-      project: default
+      project: '{{project}}'
       sources:
         - repoURL: '{{repoURL}}'
           targetRevision: '{{targetRevision}}'
@@ -73,7 +73,7 @@ spec:
           ref: valueOverlay
       destination:
         name: in-cluster
-        namespace: '{{namespace}}'
+        namespace: 'new-{{namespace}}'
       syncPolicy:
         automated:
           prune: true

@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: onesource
+  namespace: argocd
+spec:
+  destination:
+    namespace: onesource
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: configmap
+    repoURL: https://github.com/gopaljayanthi/forjpmc.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    - PrunePropagationPolicy=orphan

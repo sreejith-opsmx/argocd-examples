@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: twosources
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: twosources
+  sources:
+    - repoURL: https://github.com/gopaljayanthi/forjpmc.git
+      path: configmap
+      targetRevision: HEAD
+    - repoURL: https://github.com/gopaljayanthi/forjpmc.git
+      path: cm
+      targetRevision: HEAD

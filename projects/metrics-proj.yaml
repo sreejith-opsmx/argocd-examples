@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: metrics
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: Namespace
+  description: for metric server
+  destinations:
+  - name: in-cluster
+    namespace: metric*
+    server: https://kubernetes.default.svc
+  sourceRepos:
+  - '*'
