@@ -4,7 +4,7 @@
   "chart": "metrics-server",
   "valuesPath": "base/metrics-server/values.yaml",
   "valuesOverlayPath": "newworkloads/metrics-server/dev/values-overlay.yaml",
-  "namespace": "metrics-server",
+  "namespace": "kube-system",
   "name": "metrics-server",
   "syncwave": "one",
   "project": "metrics"
