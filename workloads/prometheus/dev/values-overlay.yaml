@@ -1,4 +1,13 @@
 server:
+  resources:
+    limits:
+      cpu: 150m
+      ephemeral-storage: 1Gi
+      memory: 1920Mi
+    requests:
+      cpu: 100m
+      ephemeral-storage: 50Mi
+      memory: 128Mi
   extraScrapeConfigs:
       - job_name: "argocd-server"
         metrics_path: /metrics
