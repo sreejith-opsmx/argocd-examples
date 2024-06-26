@@ -71,6 +71,9 @@ spec:
         - repoURL: https://github.com/gopaljayanthi/jpmcargocd.git
           targetRevision: master
           ref: valueOverlay
+        - repoURL: '{{externalRepo}}'
+          targetRevision: '{{externalBranch}}'
+          path: '{{externalPath}}'
       destination:
         name: in-cluster
         namespace: '{{namespace}}'

@@ -6,7 +6,10 @@
   "valuesOverlayPath": "workloads/nginx/dev/values-overlay.yaml",
   "namespace": "nginx1",
   "name": "nginx1",
-  "syncwave": "one"
+  "syncwave": "one",
+  "externalRepo": "https://github.com/gopaljayanthi/jpmc-external-files.git",
+  "externalBranch": "readyforargo",
+  "externalPath": "folder1/configmap"
 }
 
 
