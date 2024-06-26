@@ -6,5 +6,8 @@
   "valuesOverlayPath": "workloads/prometheus/dev/values-overlay.yaml",
   "namespace": "prom",
   "name": "prom",
-  "syncwave": "two"
+  "syncwave": "two",
+  "externalRepo": "https://github.com/gopaljayanthi/jpmc-external-files.git",
+  "externalBranch": "readyforargo",
+  "externalPath": "folder3/configmap"
 }

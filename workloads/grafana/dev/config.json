@@ -6,7 +6,10 @@
   "valuesOverlayPath": "workloads/grafana/dev/values-overlay.yaml",
   "namespace": "prom",
   "name": "grafana",
-  "syncwave": "two"
+  "syncwave": "two",
+  "externalRepo": "https://github.com/gopaljayanthi/jpmc-external-files.git",
+  "externalBranch": "readyforargo",
+  "externalPath": "folder2/configmap"
 }
 
 
