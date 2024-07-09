@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: in-cluster-workload-jpmcargocd
+  name: appset-rolling-sync
 spec:
   generators:
     - git:
@@ -71,9 +71,6 @@ spec:
         - repoURL: https://github.com/gopaljayanthi/jpmcargocd.git
           targetRevision: master
           ref: valueOverlay
-        - repoURL: '{{externalRepo}}'
-          targetRevision: '{{externalBranch}}'
-          path: '{{externalPath}}'
       destination:
         name: in-cluster
         namespace: '{{namespace}}'
